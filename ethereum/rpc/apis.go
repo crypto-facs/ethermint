@@ -16,6 +16,7 @@ const (
 	EthNamespace      = "eth"
 	PersonalNamespace = "personal"
 	NetNamespace      = "net"
+	TxPool            = "txpool"
 
 	apiVersion = "1.0"
 )
@@ -55,6 +56,12 @@ func GetRPCAPIs(clientCtx client.Context, tmWSClient *rpcclient.WSClient) []rpc.
 			Namespace: PersonalNamespace,
 			Version:   apiVersion,
 			Service:   NewPersonalAPI(ethAPI),
+			Public:    true,
+		},
+		{
+			Namespace: TxPool,
+			Version:   apiVersion,
+			Service:   NewPublicTxPoolApi(),
 			Public:    true,
 		},
 	}
